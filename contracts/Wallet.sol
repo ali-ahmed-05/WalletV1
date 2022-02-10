@@ -70,7 +70,7 @@ contract Wallet is Admin{
      require(_manager != address(0),"game does not exist");
      require(gameTomanager[game][_manager].accounts.length < gameTomanager[game][_manager].limit ,"account request exceeds limit");
 
-      address account = IAccountDeployer(iAccountDeployer).deploy(admin_contract_addr(),_msgSender(),vault_);
+      address account = IAccountDeployer(iAccountDeployer).deploy(admin_contract_addr(),_msgSender(),vault_,badgeNFT);
       IBadgeMintable(badgeNFT).createToken("URI", account, _nftType);
 
       Accounts.push(address(account));

@@ -10,12 +10,14 @@ interface IAccountDeployer {
         returns (
             address admin,
             address owner,
-            address vault
+            address vault,
+            address badgeNft
         );
          
     function deploy(
             address admin,
             address owner,
-            address vault
+            address vault,
+            address badgeNft
     ) external returns (address account);
 }

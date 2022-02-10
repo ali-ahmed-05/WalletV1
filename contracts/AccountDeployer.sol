@@ -14,6 +14,7 @@ contract AccountDeployer is IAccountDeployer {
             address admin;
             address owner;
             address vault;
+            address badgeNft;
     }
 
     
@@ -23,10 +24,11 @@ contract AccountDeployer is IAccountDeployer {
     function deploy(
             address admin,
             address owner,
-            address vault
+            address vault,
+            address badgeNft
     ) external override returns (address account) {
-        parameters = Parameters({admin: admin, owner: owner, vault: vault});
-        account = address(new Account{salt: keccak256(abi.encode(admin, owner, vault, nonce , block.timestamp))}());
+        parameters = Parameters({admin: admin, owner: owner, vault: vault , badgeNft:badgeNft});
+        account = address(new Account{salt: keccak256(abi.encode(admin, owner, vault, badgeNft, nonce , block.timestamp))}());
         nonce.increment();
         delete parameters;
     }

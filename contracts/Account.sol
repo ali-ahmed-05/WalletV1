@@ -16,6 +16,8 @@ import "./interfaces/IAccountDeployer.sol";
 import "./interfaces/IBadgeMintable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 
+// to do:
+// game should be connected to this account
 
 contract Account is  Context, ERC1155Holder , ERC721Holder {
 
@@ -38,26 +40,19 @@ contract Account is  Context, ERC1155Holder , ERC721Holder {
     mapping (address => bool) public is721;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-    // constructor(address _admin , address owner, address vault_) OwnableV1(owner){
-    //     (admin, owner, vault) = IAccountDeployer(msg.sender).parameters();
-    //     admin = Admin(_admin);
-    //     vault = RentVault(vault_);
-    // }
+    
 
     constructor() {
-        (address _admin, address owner_ , address vault_) = IAccountDeployer(msg.sender).parameters();
+        (address _admin, address owner_ , address vault_ ,address badgeNft) = IAccountDeployer(msg.sender).parameters();
         admin = Admin(_admin);
         vault = RentVault(vault_);
         _setOwner(owner_);
         _manager = _admin; //change admin to manager
+        badgeNFT = badgeNft;
     }
 
     
-    // constructor(address account,address manager) {
-    //     _setOwner(account);
-    //     _manager = manager;
-    // }
-
+   
     
     function owner() public view virtual returns (address) {
         return _owner;
@@ -108,6 +103,7 @@ contract Account is  Context, ERC1155Holder , ERC721Holder {
     }
 
     //Badge implementation
+    
     function MintBadge(uint8 nftType) public onlyOwner {
         IBadgeMintable(badgeNFT).createToken("sad", address(this), nftType);
     }
