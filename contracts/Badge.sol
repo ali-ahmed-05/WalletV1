@@ -94,7 +94,7 @@ contract Badge is ERC721 , Ownable , IBadgeMintable{
 
   
 
-    function addOwner(address owner_) public override onlyWallet{
+    function addOwner(address owner_) public override onlyWallet {
         require(walletAddress == _msgSender(),"cannot Assign owner");
         _owner[owner_]=true;
     }
@@ -115,13 +115,14 @@ contract Badge is ERC721 , Ownable , IBadgeMintable{
     }
 
     //returns the total number of Nfts minted from this contract
+
     function totalSupply() private view returns(uint256){
         return _tokenIds.current();
     }
 
    
-
     function inc_nftType(uint8 no) private returns(bool){
+
             if(no==0){
                 Bronze++;
                 return true;

@@ -11,6 +11,8 @@ import "./interfaces/IAccountDeployer.sol";
 import "./interfaces/IBadgeMintable.sol";
 import "hardhat/console.sol";
 
+// userAccount[_msgSender()]=address(account); //change
+
 contract Wallet is Admin{
 
     using Counters for Counters.Counter;
@@ -26,7 +28,7 @@ contract Wallet is Admin{
 
    //0x3B2FA3fB4c7eD3bC495F276DC60782b635bB04d9
 
-    struct WalletItem {
+  struct WalletItem {
 
     uint itemId;
     address nftContract;
@@ -35,13 +37,16 @@ contract Wallet is Admin{
 
   }
 
-    struct gameDetails{
+  struct gameDetails{
+
       address manager;
       uint256 limit;
       address[] accounts;
+
     }
 
     address[] private Accounts;
+
     mapping(uint256 => address) public idToAccount;
     mapping(address => address) public userAccount;
     mapping(uint256 => WalletItem) private idToWalletItem;
@@ -67,8 +72,8 @@ contract Wallet is Admin{
 
     function createAccount(address vault_,address game , uint8 _nftType) public returns(address) {
       address _manager = gamemanager[game];
-     require(_manager != address(0),"game does not exist");
-     require(gameTomanager[game][_manager].accounts.length < gameTomanager[game][_manager].limit ,"account request exceeds limit");
+      require(_manager != address(0),"game does not exist");
+      require(gameTomanager[game][_manager].accounts.length < gameTomanager[game][_manager].limit ,"account request exceeds limit");
 
       address account = IAccountDeployer(iAccountDeployer).deploy(admin_contract_addr(),_msgSender(),vault_,badgeNFT);
       IBadgeMintable(badgeNFT).createToken("URI", account, _nftType);

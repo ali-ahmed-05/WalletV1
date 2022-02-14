@@ -34,7 +34,7 @@ describe("Wallet", function () {
         await badge.deployed();
 
         Wallet = await ethers.getContractFactory("Wallet");
-        wallet = await Wallet.deploy(accountDeployer.address,badge.address);
+        wallet = await Wallet.deploy(accountDeployer.address , badge.address);
         await wallet.deployed();
 
         NFT = await ethers.getContractFactory("NFT");
@@ -114,7 +114,7 @@ it("3  Create Account", async function () {
     account =await Account.attach(user)
     
     let owner = await account.owner()
-   expect(person1.address).to.equal(owner)
+    expect(person1.address).to.equal(owner)
      console.log("new account : ",user)
      console.log("account owner : ",owner)
      console.log("Account creator : ",person1.address)

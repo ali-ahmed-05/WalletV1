@@ -28,7 +28,7 @@ abstract contract OwnableV1 is Context {
         _;
     }
 
-      modifier onlyManager() {
+    modifier onlyManager() {
         require(_manager == _msgSender(), "Ownable: caller is not the owner");
         _;
     }

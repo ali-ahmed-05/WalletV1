@@ -104,9 +104,9 @@ contract Account is  Context, ERC1155Holder , ERC721Holder {
 
     //Badge implementation
     
-    function MintBadge(uint8 nftType) public onlyOwner {
-        IBadgeMintable(badgeNFT).createToken("sad", address(this), nftType);
-    }
+    // function MintBadge(uint8 nftType) public onlyOwner {
+    //     IBadgeMintable(badgeNFT).createToken("sad", address(this), nftType);
+    // }
 
 
     function ownerOf(address nftContract,uint256 tokenId) public view returns (address) {
