@@ -1,10 +1,8 @@
 /**
  *Submitted for verification at Etherscan.io on 2021-12-02
 */
-
-// SPDX-License-Identifier: MIT
-
-pragma solidity 0.8.0;
+// SPDX-License-Identifier: GPL-2.0-or-later
+pragma solidity >=0.8.0;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
